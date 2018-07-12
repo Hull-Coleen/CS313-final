@@ -1,64 +1,87 @@
-function getPulse(e) {
-	console.log("getPulse function");
-   // const id = document.querySelector('#input').value;
-    //fetch(`getPulse?id=${id}`)
-	//const userId = id;
-	fetch(`getPulse`)
-      .then((res)=>{
-          return res.json()
-      })
-      .then(json =>{
-		    const output = document.querySelector('#title')
-          if ("error" in json) {
-            output.innerText = json.error;
-          } 
-		  else {
-             pulseList(json);
-             output.innerText = "Pulse Results";
-          }
-		
-      })
+function signin() {
+	console.log("inside signin");
+	document.querySelector('#name').style.visibility = "visible";
+	document.querySelector('#pass').style.visibility = "visible";
+	document.querySelector('input[name="signin"]').style.visibility = "visible";
 }
+
+function createAccount() {
+	document.querySelector('#name').style.visibility = "visible";
+	document.querySelector('#pass').style.visibility = "visible";
+	document.querySelector('#username').style.visibility = "visible";
+	document.querySelector('input[name="create"]').style.visibility = "visible";
+}
+
+function login() {
+    console.log("login");
+	var username = $("#name").val();
+	var password = $("#pass").val();
+
+	var params = {
+		username: username,
+		password: password
+	};
+    console.log(params);
+	$.post("/signin", params, function(result) {
+		if (result && result.success) {
+			document.querySelector('#name').style.visibility = "hidden";
+	        document.querySelector('#pass').style.visibility = "hidden";
+	        document.querySelector('input[name="signin"]').style.visibility = "hidden";
+			$("#status").text("Successfully logged in.");
+		} else {
+			$("#status").text("Error logging in.");
+		}
+	});
+}
+
+function getPulse() {
+	$.get("/getPulse", function(result) {
+		if (result && result.success) {
+            $("#status").text("Pulse");
+            const output = document.querySelector('#title')
+            console.log("getpulse funct" + result.pulse)
+            pulseList(result.pulse);
+            output.innerText = "Pulse Results";
+		} else {
+			$("#status").text("Got a result back, but error with login.");
+		}
+	}).fail(function(result) {
+		$("#status").text("Could get Data. Need to be logged in.");
+	});
+}
+
 function exercise(e) {
 	console.log("getexercise function");
-    //const id = document.querySelector('#input').value;
-    //fetch(`getExercise?id=${id}`)
-	fetch(`getExercise`)
-      .then((res)=>{
-          return res.json()
-      })
-      .then(json =>{
-           const output = document.querySelector('#title')
-          if ("error" in json) {
-            output.innerText = json.error;
-          } 
-		  else {
-             exerciseList(json);
-             output.innerText = "Exercise Results";
-          }
-      })
+    $.get("/getExercise", function(result) {
+		if (result && result.success) {
+            $("#status").text("Exercise");
+            const output = document.querySelector('#title')
+            console.log("getexercise funct" + JSON.stringify(result))
+            exerciseList(result.health);
+            output.innerText = "Exercise Results";
+		} else {
+			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+		}
+	}).fail(function(result) {
+		$("#status").text("Could not get server time.");
+	});
 
 }
 function weight(e) {
 	console.log("getweight function");
-    //const id = document.querySelector('#input').value;
-    //fetch(`getWeight?id=${id}`)
-	fetch(`getWeight`)
-      .then((res)=>{
-          return res.json()
-      })
-      .then(json =>{
-          const output = document.querySelector('#title')
-          if ("error" in json) {
-            output.innerText = json.error;
-          } 
-		  else {
-             weightList(json);
-             output.innerText = "Weight Results";
-          }
-		
-      })
-
+    $.get("/getWeight", function(result) {
+		if (result && result.success) {
+            $("#status").text("Weight");
+            const output = document.querySelector('#title')
+           // console.log("getweight funct" + JSON.stringify(result))
+            weightList(result.weight);
+            output.innerText = "Weight Results";
+		} else {
+			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+		}
+	}).fail(function(result) {
+		$("#status").text("Could not get server time.");
+	});
 }
 function weightList(data){
     var objs = data.map(item => {
@@ -104,85 +127,64 @@ function pulseList(data){
 }
 
 function insert(e) {
-	console.log("insert function");
-   // const id = document.querySelector('#id').value;
-	const exercise = document.querySelector('#exercise').value;
-	const time = document.querySelector('#time').value;
-	const weight = document.querySelector('#weight').value;
-	const pulse = document.querySelector('#pulse').value;
-	const date = document.querySelector('#date').value;
-	//const userId = id;
-	fetch(`insert?exercise=${exercise}&time=${time}&weight=${weight}&pulse=${pulse}&date=${date}`)
-    //fetch(`insert?id=${id}&exercise=${exercise}&time=${time}&weight=${weight}&pulse=${pulse}&date=${date}`)
-      .then((res)=>{
-          return res.json()
-      })
-	  .then(json =>{
-          const output = document.querySelector('#output');
-		  if ("error" in json) {
-            output.innerText = json.error;
-          } 
-		    else {
-          output.innerText = json.id;
-        }
-		  
-      })
+    console.log("insert function");
+    var exercise = $("#exercise").val();
+	var time = $("#time").val();
+    var pulse = $("#pulse").val();
+	var weight = $("#weight").val();
+    var date = $("#date").val();
+	
+	var params = {
+        exercise: exercise,
+        time: time,
+        pulse: pulse,
+        weight: weight,
+        date: date
+	};
+    $.get("/insert", params, function(result) {
+		if (result && result.success) {
+            $("#status").text("Weight");
+            
+		} else {
+			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+		}
+	}).fail(function(result) {
+		$("#status").text("Could not get server time.");
+	});
+}
+ 
 
+function logout() {
+	$.post("/logout", function(result) {
+		if (result && result.success) {
+			$("#status").text("Successfully logged out.");
+		} else {
+			$("#status").text("Error logging out.");
+		}
+	});
 }
 
 function create(e) {
-	console.log("insert function");
-    const name = document.querySelector('#name1').value;
-	const pass = document.querySelector('#pass1').value;
-	const username = document.querySelector('#username').value;
-	var data = {name1 : name, pass1 : pass, username: username};
-    fetch(`/createUser`, { method: "POST", body: JSON.stringify(data), headers:{
-    'Content-Type': 'application/json'
-  }})
-      .then((res)=>{
-          return res.json()
-		  console.log(JSON.stringify(res.json));
-      })
-	  .then(json =>{
-		  console.log("returning json" + JSON.stringify(json));
-          const output = document.querySelector('#greeting');
-		  if ("error" in json) {
-            output.innerText = json.error;
-          } 
-		    else {
-          output.innerText = json.id;
-		  const userId = document.querySelector('#userId');
-		  id = json.id;
-		  userId.innerText = id;
-        }
-		  
-      })
+    console.log("insert function");
+    var username = $("#username").val();
+    var password = $("#pass").val();
+    var name =$("#name").val();
+
+	var params = {
+		username: username,
+        password: password,
+        name: name
+	};
+    console.log(params);
+	$.post("/createUser", params, function(result) {
+		if (result && result.success) {
+			$("#status").text("Successfully logged in.");
+		} else {
+			$("#status").text("Error logging in.");
+		}
+	});
 
 }
-function getUserName(e) {
-	const name = document.querySelector('#name').value;
-	const pass = document.querySelector('#pass').value;
-	var data = {name : name, pass : pass};
-    fetch(`signin`, { method: "POST", body: JSON.stringify(data), headers:{
-    'Content-Type': 'application/json'
-  }})
-      .then((res)=>{
-          return res.json()
-      })
-      .then(json =>{
-          console.log("inside fetch" + JSON.stringify(json));
-          const output = document.querySelector('#greeting');
-          if ("error" in json) {
-            output.innerText = json.error;
-          } 
-		  else {
-          output.innerText = json.name;
-		  id = json.id;
-		  console.log(id);
-		  
-        }
-      })
 
-}
 
 

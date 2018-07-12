@@ -7,41 +7,53 @@
 var id;
 </script>
 <body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Fitness App</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><p id="greeting" class="greeting"></p></li>
+        <li><button class="button" onclick="signin();">Sign In</button></li>
+        <li><button class="button" onclick="createAccount();">Create Account</button></li>
+        <li><button class="button" onclick="logout();">Log out</button></li>
+        
+      </ul>
+    </div>
+  </nav>
 
- <h1>Home Page</h1>
- <div id="greeting" class="greeting"></div>
+ <h1>Fitness Tracker</h1>
+ <div id="status"></div>
  <p id="userId" ></p> 
- <p>Create a User</p>
- <!--  <form method="post" action="/createUser"> -->
- Name: <input type="name" class="name1" id="name1" name="name1"></input><br>
- Password: <input type="password" class="pass1" id="pass1" name="pass1"></input><br>
- User Name: <input type="text" class="username" id="username" name="username"></input><br>
- <input  onclick="create()" type='submit' value='Create User'></input>
- <!--</form> -->
- <p>Sign In</p>
- <!-- <form method="post" action="/signin"> -->
- User Name: <input type="name" class="name" id="name" name="name"></input><br>
- Password: <input type="password" class="pass" id="pass" name="pass"></input><br>
- <input onclick='getUserName()' type="submit" value="Enter"><br><br>
- <!-- </form> -->
- <!-- <button onclick='getUser()'>Get User</button><br>  --> 
- <div id="output" class="output"></div><br><br>
- <!-- <input type="text" class="id" id="id"></input> -->
- Exercise type<input type="text" class="exercise" id="exercise"></input>
- minutes spent exercising<input type="text" class="time" id="time"></input>
- Your current wieght<input type="text" class="weight" id="weight"></input>
- resting pulse rate (INT) <input type="text" class="pulse" id="pulse"></input>
- todays' date<input type="text" class="date" id="date"></input>
- <button onclick='insert()'>Enter Data</button><br><br>
- <!--  <input type="number" class="input" id="input"></input> -->
- <button onclick='getPulse()'>Get Pulse</button>
- <button onclick='exercise()'>Get Exercise</button>
- <button onclick='weight()'>Get Weight</button>
+ <div id="log">
+ <input type="text" class="userinput" id="username" name="username" placeholder="User Name"></input>
+ <input type="name" class="userinput" id="name" name="name" placeholder="Name"></input>
+ <input type="password" class="userinput" id="pass" name="pass" placeholder="Password"></input><br>
+ <input  class="button" id="logon" name="signin" onclick='login()' type="submit" value="Sign In">
+ <input  class="button" id="logon" name="create" onclick="create()" type='submit' value='Create User'></input><br>
+ </div>
  
- <div> <h2 id="title" ></h2><ul id="health"></ul></div>
  
-
-
+ <div class="container-fluid">
+  
+  <div class="row">
+    <div class="col-sm-3 col-md-6" id="row">
+       Exercise type<input type="text" class="input" id="exercise"></input><br>
+       minutes spent exercising<input type="text" class="input" id="time"></input><br>
+       Your current wieght<input type="text" class="input" id="weight"></input><br>
+       resting pulse rate (INT) <input type="text" class="input" id="pulse"></input><br>
+       todays' date<input type="text" class="input" id="date"></input><br><br>
+       <button class="button" id="getData" onclick='insert()'>Enter Data</button><br>
+    </div>
+    <div class="col-sm-9 col-md-6"id="row">
+      <button class="button" id="data" onclick='getPulse()'>Get Pulse</button>
+      <button class="button" id="data" onclick='exercise()'>Get Exercise</button>
+      <button  class="button" id="data" onclick='weight()'>Get Weight</button>
+ 
+       <div> <h2 id="title" ></h2><ul id="health"></ul></div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

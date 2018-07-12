@@ -1,27 +1,74 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
+body {
+   background-color: #e6ffff;
+   font-family: Agency FB;
+   color: #000080;
+   font-size: 18px;
+
+}
+h1 {
+  text-align: center;
+}
+.userinput {
+  visibility: hidden;
+   padding: 5px 5px;
+   margin: 8px 8px;
+    display: inline-block;
+    border: 1px solid #000080;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+.input {
+  padding: 5px 5px;
+   margin: 8px 8px;
+    display: inline-block;
+    border: 1px solid #000080;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+.button {
+  background-color: #18cdf7; 
+  border-radius: 12px;
+  border: none;
+  color: #000080;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+div#status {
+  text-align: center;
+}
+div.row {
+	
+  padding: 40px;
+  
+
+}
+div#row {
+  
+}
+div#log {
+  margin-left: 20px;
+  
+}
+input#logon {
+  margin-left: 30px;
+  visibility: hidden;
+}
+button#getData {
+  margin-left: 160px;
+}
+button#data {
+  margin-left: 60px;
+}
+ul {
+  text-align: center;
+}
+h2 {
+  text-align: center;
+}
+
 
