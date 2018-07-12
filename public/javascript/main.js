@@ -24,6 +24,8 @@ function login() {
     console.log(params);
 	$.post("/signin", params, function(result) {
 		if (result && result.success) {
+			console.log("help " + result.name)
+			document.querySelector('#greeting').innerText = "Welcome Back " + result.name;
 			document.querySelector('#name').style.visibility = "hidden";
 	        document.querySelector('#pass').style.visibility = "hidden";
 	        document.querySelector('input[name="signin"]').style.visibility = "hidden";
@@ -43,7 +45,7 @@ function getPulse() {
             pulseList(result.pulse);
             output.innerText = "Pulse Results";
 		} else {
-			$("#status").text("Got a result back, but error with login.");
+			$("#status").text("");
 		}
 	}).fail(function(result) {
 		$("#status").text("Could get Data. Need to be logged in.");
@@ -60,10 +62,10 @@ function exercise(e) {
             exerciseList(result.health);
             output.innerText = "Exercise Results";
 		} else {
-			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could not get server time.");
+		$("#status").text("Could get Data. Need to be logged in.");
 	});
 
 }
@@ -77,10 +79,10 @@ function weight(e) {
             weightList(result.weight);
             output.innerText = "Weight Results";
 		} else {
-			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could not get server time.");
+		$("#status").text("Could get Data. Need to be logged in.");
 	});
 }
 function weightList(data){
@@ -146,10 +148,10 @@ function insert(e) {
             $("#status").text("Weight");
             
 		} else {
-			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could not get server time.");
+		$("#status").text("Could get Data. Need to be logged in.");
 	});
 }
  
@@ -175,10 +177,15 @@ function create(e) {
         password: password,
         name: name
 	};
-    console.log(params);
+    //console.log(params);
 	$.post("/createUser", params, function(result) {
 		if (result && result.success) {
+			console.log("help " + result.name)
 			$("#status").text("Successfully logged in.");
+			document.querySelector('#name').style.visibility = "hidden";
+	        document.querySelector('#pass').style.visibility = "hidden";
+	        document.querySelector('#username').style.visibility = "hidden";
+	        document.querySelector('input[name="create"]').style.visibility = "hidden";
 		} else {
 			$("#status").text("Error logging in.");
 		}
