@@ -8,12 +8,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon",
     "test": "node test.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "express-session": "^1.15.6",
     "pg": "^7.4.3",
     "pg-promise": "^8.4.4"
   },
