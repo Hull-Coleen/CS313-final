@@ -1,3 +1,4 @@
+//var dateFormat = require('dateformat');
 function signin() {
 	console.log("inside signin");
 	document.querySelector('#name').style.visibility = "visible";
@@ -10,6 +11,10 @@ function createAccount() {
 	document.querySelector('#pass').style.visibility = "visible";
 	document.querySelector('#username').style.visibility = "visible";
 	document.querySelector('input[name="create"]').style.visibility = "visible";
+}
+function date () {
+
+	 document.querySelector('#date').innerText = new Date().toDateString();
 }
 
 function login() {
@@ -87,7 +92,10 @@ function weight(e) {
 }
 function weightList(data){
     var objs = data.map(item => {
-        return item.weight;
+		var d = new Date(item.day_of_input);
+		var formDate = (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+		console.log("date" + formDate);
+        return item.weight + " " +  formDate;
     })
     console.log(objs);
     var div = document.querySelector('#health');
@@ -101,6 +109,7 @@ function weightList(data){
 }
 function exerciseList(data){
     var objs = data.map(item => {
+		
         return item.exercise + "  " + item.exercise_time;
     })
     console.log(objs);
@@ -182,6 +191,7 @@ function create(e) {
 		if (result && result.success) {
 			console.log("help " + result.name)
 			$("#status").text("Successfully logged in.");
+			document.querySelector('#greeting').innerText = "Welcome " + name;
 			document.querySelector('#name').style.visibility = "hidden";
 	        document.querySelector('#pass').style.visibility = "hidden";
 	        document.querySelector('#username').style.visibility = "hidden";

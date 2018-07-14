@@ -1,4 +1,5 @@
 require('dotenv').config();
+var dateFormat = require('dateformat');
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
@@ -64,7 +65,7 @@ function getPulse(req, res) {
     console.log(id);
     console.log(req.session.userId);
     // query database
-    db.any('SELECT pulse FROM health WHERE person_id = $1', [id]) // returns promise
+    db.any('SELECT pulse, day_of_input FROM health WHERE person_id = $1 ORDER BY day_of_input DESC', [id]) // returns promise
       .then((results)=> {
         console.log(results)
         res.status(200)
@@ -82,7 +83,7 @@ function getExercise(req, res) {
 	
      var id = req.session.userId;
     // query database
-    db.any('SELECT exercise, exercise_time FROM health WHERE person_id = $1', [id]) // returns promise
+    db.any('SELECT exercise, exercise_time, day_of_input FROM health WHERE person_id = $1 ORDER BY day_of_input DESC' , [id]) // returns promise
       .then((results)=> {
         res.status(200)
            .json({success:true, health: results})
@@ -99,7 +100,7 @@ function getWeight(req, res) {
 
     var id = req.session.userId;
     // query database
-    db.any('SELECT weight FROM health WHERE person_id = $1', [id]) // returns promise
+    db.any('SELECT weight, day_of_input FROM health WHERE person_id = $1 ORDER BY day_of_input DESC', [id]) // returns promise
       .then((results)=> {
         res.status(200)
            .json({success: true, weight: results})
@@ -109,7 +110,7 @@ function getWeight(req, res) {
       .catch((err)=> {
           console.log(err)
           res.status(400)
-             .json({success:"Person does not exist."})
+             .json({success: false})
       })
 }
 
@@ -163,7 +164,7 @@ function insertData(req, res) {
       .catch((err)=> {
           console.log(err)
           res.status(400)
-             .json({success:"could not insert data."})
+             .json({success: false})
       })
 }
 

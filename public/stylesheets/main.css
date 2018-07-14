@@ -25,6 +25,9 @@ h1 {
     border-radius: 12px;
     box-sizing: border-box;
 }
+button#space {
+  margin-left: 900px;
+}
 .button {
   background-color: #18cdf7; 
   border-radius: 12px;
@@ -37,6 +40,7 @@ h1 {
   font-size: 14px;
   margin: 4px 2px;
   cursor: pointer;
+  font-weight: bold;
 }
 div#status {
   text-align: center;
@@ -54,18 +58,22 @@ div#log {
   margin-left: 20px;
   
 }
+div.col-sm-1 {
+  //background-color: #18cdf7;
+}
 input#logon {
   margin-left: 30px;
   visibility: hidden;
 }
 button#getData {
-  margin-left: 160px;
+  margin-left: 100px;
 }
 button#data {
-  margin-left: 60px;
+  margin-left: 70px;
 }
-ul {
+ul#health {
   text-align: center;
+  list-style-type: none;
 }
 h2 {
   text-align: center;

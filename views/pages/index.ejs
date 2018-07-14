@@ -3,9 +3,7 @@
 <head>
   <% include ../partials/header.ejs %>
 </head>
-<script>
-var id;
-</script>
+
 <body>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -13,8 +11,8 @@ var id;
         <a class="navbar-brand" href="#">Fitness App</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><p id="greeting" class="greeting"></p></li>
-        <li><button class="button" onclick="signin();">Sign In</button></li>
+        <li class="active"><a href="#" id="greeting" class="greeting"></a></li>
+        <li><button id="space" class="button" onclick="signin();">Sign In</button></li>
         <li><button class="button" onclick="createAccount();">Create Account</button></li>
         <li><button class="button" onclick="logout();">Log out</button></li>
         
@@ -24,7 +22,7 @@ var id;
 
  <h1>Fitness Tracker</h1>
  <div id="status"></div>
- <p id="userId" ></p> 
+ <!-- <div id="date" ></div> <button class="button" onclick="date();">Date</button> -->
  <div id="log">
  <input type="text" class="userinput" id="username" name="username" placeholder="User Name"></input>
  <input type="name" class="userinput" id="name" name="name" placeholder="Name"></input>
@@ -35,25 +33,27 @@ var id;
  
  
  <div class="container-fluid">
-  
-  <div class="row">
-    <div class="col-sm-3 col-md-6" id="row">
+   <div class="row">
+     <div class="col-sm-1"></div>
+     <div class="col-sm-5" id="row">
        Exercise type<input type="text" class="input" id="exercise"></input><br>
        minutes spent exercising<input type="text" class="input" id="time"></input><br>
        Your current wieght<input type="text" class="input" id="weight"></input><br>
        resting pulse rate (INT) <input type="text" class="input" id="pulse"></input><br>
        todays' date<input type="text" class="input" id="date"></input><br><br>
        <button class="button" id="getData" onclick='insert()'>Enter Data</button><br>
+      </div>
+      <div class="col-sm-5 "id="row">
+        <button class="button" id="data" onclick='getPulse()'>Get Pulse</button>
+        <button class="button" id="data" onclick='exercise()'>Get Exercise</button>
+        <button  class="button" id="data" onclick='weight()'>Get Weight</button>
+        <div> <h2 id="title" ></h2>
+          <ul id="health"></ul>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-9 col-md-6"id="row">
-      <button class="button" id="data" onclick='getPulse()'>Get Pulse</button>
-      <button class="button" id="data" onclick='exercise()'>Get Exercise</button>
-      <button  class="button" id="data" onclick='weight()'>Get Weight</button>
- 
-       <div> <h2 id="title" ></h2><ul id="health"></ul></div>
-    </div>
+  
   </div>
-</div>
 
 </body>
 </html>
