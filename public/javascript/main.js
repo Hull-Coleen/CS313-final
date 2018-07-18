@@ -9,12 +9,17 @@ function signin() {
 function createAccount() {
 	document.querySelector('#name').style.visibility = "visible";
 	document.querySelector('#pass').style.visibility = "visible";
+	document.querySelector('#password').style.visibility = "visible";
 	document.querySelector('#username').style.visibility = "visible";
 	document.querySelector('input[name="create"]').style.visibility = "visible";
 }
-function date () {
+function getDate () {
+	var d = new Date();
+	var formDate = (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+	console.log(formDate);
+	return formDate;
 
-	 document.querySelector('#date').innerText = new Date().toDateString();
+	 //return new Date().toDateString();
 }
 
 function login() {
@@ -53,7 +58,7 @@ function getPulse() {
 			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could get Data. Need to be logged in.");
+		$("#status").text("Could not get Data. You need to be logged in.");
 	});
 }
 
@@ -70,7 +75,7 @@ function exercise(e) {
 			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could get Data. Need to be logged in.");
+		$("#status").text("Could not get Data. You need to be logged in.");
 	});
 
 }
@@ -87,7 +92,7 @@ function weight(e) {
 			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could get Data. Need to be logged in.");
+		$("#status").text("Could not get Data. You need to be logged in.");
 	});
 }
 function weightList(data){
@@ -95,7 +100,7 @@ function weightList(data){
 		var d = new Date(item.day_of_input);
 		var formDate = (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
 		console.log("date" + formDate);
-        return item.weight + " " +  formDate;
+        return item.weight + " --- " +  formDate;
     })
     console.log(objs);
     var div = document.querySelector('#health');
@@ -109,8 +114,9 @@ function weightList(data){
 }
 function exerciseList(data){
     var objs = data.map(item => {
-		
-        return item.exercise + "  " + item.exercise_time;
+		var d = new Date(item.day_of_input);
+		var formDate = (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+        return item.exercise + " ---  " + item.exercise_time +" --- " + formDate;
     })
     console.log(objs);
     var div = document.querySelector('#health');
@@ -124,7 +130,9 @@ function exerciseList(data){
 }
 function pulseList(data){
     var objs = data.map(item => {
-        return item.pulse;
+		var d = new Date(item.day_of_input);
+		var formDate = (d.getMonth()+1) + '/' + d.getDate() + '/' + d.getFullYear();
+        return item.pulse + " --- " + formDate;
     })
     console.log(objs);
     var div = document.querySelector('#health');
@@ -143,7 +151,8 @@ function insert(e) {
 	var time = $("#time").val();
     var pulse = $("#pulse").val();
 	var weight = $("#weight").val();
-    var date = $("#date").val();
+	//var date = $("#date").val();
+	var date = getDate();
 	
 	var params = {
         exercise: exercise,
@@ -154,13 +163,13 @@ function insert(e) {
 	};
     $.get("/insert", params, function(result) {
 		if (result && result.success) {
-            $("#status").text("Weight");
+            $("#status").text("Data inserted");
             
 		} else {
 			$("#status").text("");
 		}
 	}).fail(function(result) {
-		$("#status").text("Could get Data. Need to be logged in.");
+		$("#status").text("Could not insert Data. Are you logged in?");
 	});
 }
  
@@ -168,6 +177,12 @@ function insert(e) {
 function logout() {
 	$.post("/logout", function(result) {
 		if (result && result.success) {
+			var list = document.querySelector('#health');
+			document.querySelector('#title').innerText = "";
+			while (list.hasChildNodes()) {
+				list.removeChild(list.firstChild);
+			}
+			document.querySelector('#greeting').innerText = "Good Bye"; 
 			$("#status").text("Successfully logged out.");
 		} else {
 			$("#status").text("Error logging out.");
@@ -176,7 +191,7 @@ function logout() {
 }
 
 function create(e) {
-    console.log("insert function");
+    
     var username = $("#username").val();
     var password = $("#pass").val();
     var name =$("#name").val();
@@ -186,15 +201,18 @@ function create(e) {
         password: password,
         name: name
 	};
-    //console.log(params);
+    //
 	$.post("/createUser", params, function(result) {
 		if (result && result.success) {
 			console.log("help " + result.name)
 			$("#status").text("Successfully logged in.");
 			document.querySelector('#greeting').innerText = "Welcome " + name;
 			document.querySelector('#name').style.visibility = "hidden";
-	        document.querySelector('#pass').style.visibility = "hidden";
-	        document.querySelector('#username').style.visibility = "hidden";
+			document.querySelector('#pass').style.visibility = "hidden";
+			document.querySelector('#password').style.visibility = "hidden";
+			document.querySelector('#username').style.visibility = "hidden";
+			document.querySelector('#messagePass').style.visibility = "hidden";
+			document.querySelector('#messagePass1').style.visibility = "hidden";
 	        document.querySelector('input[name="create"]').style.visibility = "hidden";
 		} else {
 			$("#status").text("Error logging in.");
@@ -202,6 +220,24 @@ function create(e) {
 	});
 
 }
+function check() {      
 
+if (document.querySelector('input[name="create"]').style.visibility === 'visible') {
+	//
+	if (document.getElementById('password').value ==
+	  document.getElementById('pass').value) {
+	  document.getElementById('messagePass').style.color = '#000080';
+	  document.getElementById('messagePass').innerHTML = 'matching';
+	   document.getElementById('messagePass1').style.color = '#000080';
+	  document.getElementById('messagePass1').innerHTML = 'matching';
+	} else {
+	  document.getElementById('messagePass').style.color = 'red';
+	  document.getElementById('messagePass').innerHTML = 'not matching';
+	  document.getElementById('messagePass1').style.color = 'red';
+	  document.getElementById('messagePass1').innerHTML = 'not matching';
+
+	}
+}
+}
 
 

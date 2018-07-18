@@ -9,10 +9,10 @@
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Fitness App</a>
+        <a class="navbar-brand" href="#" id="greeting" class="greeting"></a>
       </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#" id="greeting" class="greeting"></a></li>
-        <li><button id="space" class="button" onclick="signin();">Sign In</button></li>
+      <ul class="nav navbar-nav navbar-right" class="links" >
+        <li><button class="button" onclick="signin();">Sign In</button></li>
         <li><button class="button" onclick="createAccount();">Create Account</button></li>
         <li><button class="button" onclick="logout();">Log out</button></li>
         
@@ -20,31 +20,54 @@
     </div>
   </nav>
 
- <h1>Fitness Tracker</h1>
- <div id="status"></div>
- <img src="/blueheart.jpg" alt="heart">
- <!-- <div id="date" ></div> <button class="button" onclick="date();">Date</button> -->
- <div id="log">
- <input type="text" class="userinput" id="username" name="username" placeholder="User Name"></input>
- <input type="name" class="userinput" id="name" name="name" placeholder="Name"></input>
- <input type="password" class="userinput" id="pass" name="pass" placeholder="Password"></input><br>
- <input  class="button" id="logon" name="signin" onclick='login()' type="submit" value="Sign In">
- <input  class="button" id="logon" name="create" onclick="create()" type='submit' value='Create User'></input><br>
- </div>
+  <div class="container-fluid">
+    <div class="rowTop">
+      <div class="col-sm-4 padding">
+        <img src="blueheart.jpg" alt="heart">
+      </div>
+      <div class="col-sm-4">
+        <br><h1>Fitness Tracker</h1>
+        <div id="status"></div> 
+      </div>
+       <div class="col-sm-4">
+        <div id="log" ><br><br>
+            <input type="text" class="userinput" id="username" name="username" placeholder="Name"></input><br>
+            <input type="name" class="userinput" id="name" name="name" placeholder="User Name"></input><br>
+            <input type="password" onkeyup="check();" class="userinput" id="pass" name="pass" placeholder="Password"></input>
+            <span id='messagePass'></span><br>
+            <input type="password" onkeyup="check();" class="userinput" id="password" name="password" placeholder="Confrim Password"></input>
+            <span id='messagePass1'></span><br>
+            <input  class="button" id="logon" name="signin" onclick='login()' type="submit" value="Sign In">
+            <input  class="button" id="logon" name="create" onclick="create()" type='submit' value='Create User'></input><br><br>
+          </div> 
+       </div>
+         
+     </div>
+   </div>
  
  
  <div class="container-fluid">
    <div class="row">
-     <div class="col-sm-1"></div>
-     <div class="col-sm-5" id="row">
-       Exercise type<input type="text" class="input" id="exercise"></input><br>
-       minutes spent exercising<input type="text" class="input" id="time"></input><br>
-       Your current wieght<input type="text" class="input" id="weight"></input><br>
-       resting pulse rate (INT) <input type="text" class="input" id="pulse"></input><br>
-       todays' date<input type="text" class="input" id="date"></input><br><br>
-       <button class="button" id="getData" onclick='insert()'>Enter Data</button><br>
+     <div class="col-sm-1">
+        <img src="pinkWeight.jpg" alt="weight">
+     </div>
+     <div class="col-sm-4 insert" id="row">
+        <div class="inputfromUser">
+          <label for="exercise">Exercise Type</label>
+          <input type="text" class="input" id="exercise"></input><br>
+          <label for="time">Min spent exercising</label>
+          <input type="text" class="input" id="time"></input><br>
+          <label for="weight">Current Weight</label>
+          <input type="text" class="input" id="weight"></input><br>
+          <label for="pulse">Resting pulse rate (INT)</label>
+          <input type="text" class="input" id="pulse"></input><br><br>
+       <!-- todays' date<input type="text" class="input" id="date"></input><br><br> -->
+           <button class="button" id="getData" onclick='insert()'>Enter Data</button><br>
+        </div>  
+      </div><div class="col-sm-1">
+          <img src="pinkWeight.jpg" alt="weight">
       </div>
-      <div class="col-sm-5 "id="row">
+      <div class="col-sm-4 "id="row">
         <button class="button" id="data" onclick='getPulse()'>Get Pulse</button>
         <button class="button" id="data" onclick='exercise()'>Get Exercise</button>
         <button  class="button" id="data" onclick='weight()'>Get Weight</button>
@@ -52,9 +75,13 @@
           <ul id="health"></ul>
         </div>
       </div>
-    </div>
-  
+      <div class="col-sm-1">
+         <img src="pinkWeight.jpg" alt="weight">
+      </div>
+    </div> 
   </div>
+  
+  
 
 </body>
 </html>

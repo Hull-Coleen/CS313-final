@@ -7,6 +7,9 @@ body {
 }
 h1 {
   text-align: center;
+  border: 1px solid #000080;
+  background: white;
+  border-radius: 12px;
 }
 .userinput {
   visibility: hidden;
@@ -17,8 +20,42 @@ h1 {
     border-radius: 12px;
     box-sizing: border-box;
 }
+.inputfromUser {
+  margin-left: 45px;
+}
+
+.navbar .navbar-brand {
+  color:#000080;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  border-bottom: 1px solid #000080;
+}
+.rowTop {
+  
+  padding: 0px;
+}
+.padding {
+  padding: 0px;
+  margin-left: -15px;
+}
+
+img {
+  border-radius: 22px;
+  border: 1px solid #000080;
+  margin-left: 0px;
+}
+.row {
+ 
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
 .input {
-  padding: 5px 5px;
+    padding: 5px 5px;
    margin: 8px 8px;
     display: inline-block;
     border: 1px solid #000080;
@@ -51,32 +88,30 @@ div.row {
   
 
 }
-div#row {
-  
-}
+
 div#log {
-  margin-left: 20px;
+  text-align: center;
   
 }
-div.col-sm-1 {
-  //background-color: #18cdf7;
-}
+
 input#logon {
-  margin-left: 30px;
+  
   visibility: hidden;
 }
 button#getData {
   margin-left: 100px;
 }
 button#data {
-  margin-left: 70px;
+  margin-left: 15%;
 }
 ul#health {
   text-align: center;
   list-style-type: none;
 }
 h2 {
+  padding: 0px 0px 0px 30px;
   text-align: center;
 }
+
 
 

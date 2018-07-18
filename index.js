@@ -10,7 +10,6 @@ const session = require('express-session');
 const pg = require('pg-promise')({});
 var conString = process.env.DATABASE_URL || process.env.LOCAL_URL;
 const db = pg(conString);
-const { getSalt, getHash} = require('./util');
 const app = express();
 
 var sess = {
@@ -47,11 +46,11 @@ app.get('/getExercise', verifyLogin, getExercise);
 app.get('/getWeight', verifyLogin, getWeight);
 app.get('/insert', verifyLogin, insertData);
 
-// If a user is currently stored on the session, removes it
+// 
 function handleLogout(request, response) {
 	var result = {success: false};
 
-	// We should do better error checking here to make sure the parameters are present
+	// 
 	if (request.session.userId) {
 		request.session.destroy();
 		result = {success: true};
@@ -158,7 +157,7 @@ function insertData(req, res) {
       .then((query)=> {
         console.log("insert function" + query)
         res.status(200)
-           .json(query)
+           .json({success: true})
            req.session.userId = query;
       })
       .catch((err)=> {
