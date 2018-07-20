@@ -23,6 +23,9 @@ h1 {
 .inputfromUser {
   margin-left: 45px;
 }
+.button:disabled {
+  background-color:#CCC;
+}
 
 .navbar .navbar-brand {
   color:#000080;

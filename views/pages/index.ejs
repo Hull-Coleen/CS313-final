@@ -30,10 +30,11 @@
         <div id="status"></div> 
       </div>
        <div class="col-sm-4">
-        <div id="log" ><br><br>
+        <div id="log" ><br>
+            <span id='passWarning'></span><br>
             <input type="text" class="userinput" id="username" name="username" placeholder="Name"></input><br>
             <input type="name" class="userinput" id="name" name="name" placeholder="User Name"></input><br>
-            <input type="password" onkeyup="check();" class="userinput" id="pass" name="pass" placeholder="Password"></input>
+            <input type="password" onkeyup="check();" oninput="checkPassword();" class="userinput" id="pass" name="pass" placeholder="Password"></input>
             <span id='messagePass'></span><br>
             <input type="password" onkeyup="check();" class="userinput" id="password" name="password" placeholder="Confrim Password"></input>
             <span id='messagePass1'></span><br>
